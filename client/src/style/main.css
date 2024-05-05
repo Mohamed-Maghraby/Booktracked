@@ -1,0 +1,188 @@
+*{
+    font-family: 'Inter', sans-serif;
+    /* background-color: white; */
+}
+:root {
+    --Text-color-1 : #54716B;
+    --Text-color-2 : #ffffff;
+    --Primary-Color-1 : hsl(168, 12%, 47%);
+    --Primary-Color-2 : #AFC4BF;
+    
+    --Secondary-text-color  : rgb(92, 92, 92);
+}
+
+/*General Classes*/
+.container {
+    width: 1200px;
+    margin: auto
+}
+
+.home, .library {
+    display: flex;
+    height: 5000px;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    align-items: flex-start !important;
+   
+}
+    
+
+/*Start Header*/
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.header .logo {
+    width: 150px;
+}
+
+.header nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.header ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.header li {
+    padding: 0 20px;
+}
+
+.header a {
+    text-decoration: none;
+    color: var(--Text-color-1);
+    font-weight: 500;
+}
+/*End Header*/
+
+/*Button*/
+.button {
+    width: 165px;
+    height: 40px;
+    background-color: var(--Primary-Color-1);
+    border-radius: 8px;
+    border: none;
+    color: var(--Text-color-2);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+/*Button*/
+
+/*Start Card*/
+.search-result {
+    padding: 100px 0;
+}
+
+.free-books {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 50px 50px;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    box-shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.15), 0px 2px 7px 0px rgba(16, 25, 40, 0.15), 0px 2px 5px -2px rgba(16, 25, 40, 0.15);
+    width: 250px;
+    padding: 20px 0;
+}
+
+.book-cover {
+    height: 241px;
+    width: 173px;
+    object-fit: cover;
+    box-shadow: 0px 0px 5px 0px #00000021;
+}
+.card-wrapper .book-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0 10px 0;
+    text-align: center;
+    max-height: 50px;
+    overflow: hidden;
+    padding: 0 20px;
+    cursor: pointer;
+}
+.card-wrapper .author {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 75%;    
+}
+.card-wrapper .rating {
+    margin: 0 0 10px 0;
+}
+
+/*End Card*/
+
+
+/*Start Search API*/
+
+.book-search-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+    width: 100%;
+}
+.book-search-wrapper {
+    position: relative;
+}
+.book-search-wrapper input {
+    width: 666px;
+    height: 50px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid var(--Primary-Color-1);
+    outline: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--Text-color-1);
+}
+.book-search-wrapper input:focus {
+    box-shadow: 0px 2px 8px 0px #00000038;
+}
+.book-search-wrapper input::placeholder {
+    font-size: 16px;
+    color :#798481
+    
+}
+.search-button {
+    height: 50px;
+    border-radius: 50px;
+    position: absolute;
+    right: 0%;
+}
+.search-button:hover {
+    background-color: #5f7a75;
+}
+
+
+.ql-tooltip {
+    background-color: #3a3a3af7 !important;
+    border-radius: 8px !important;
+}

@@ -1,0 +1,201 @@
+[
+    {
+        "id": 72572,
+        "title": "Computers—the machines we think with",
+        "authors": [
+            {
+                "name": "Halacy, D. S. (Daniel Stephen)",
+                "birth_year": 1919,
+                "death_year": 2002
+            }
+        ],
+        "translators": [],
+        "subjects": [
+            "Computers -- Popular works",
+            "Electronic data processing -- Popular works"
+        ],
+        "bookshelves": [],
+        "languages": [
+            "en"
+        ],
+        "copyright": false,
+        "media_type": "Text",
+        "formats": {
+            "text/html": "https://www.gutenberg.org/ebooks/72572.html.images",
+            "application/epub+zip": "https://www.gutenberg.org/ebooks/72572.epub3.images",
+            "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/72572.kf8.images",
+            "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/72572.txt.utf-8",
+            "application/rdf+xml": "https://www.gutenberg.org/ebooks/72572.rdf",
+            "image/jpeg": "https://www.gutenberg.org/cache/epub/672/pg672.cover.medium.jpg",
+            "application/octet-stream": "https://www.gutenberg.org/cache/epub/72572/pg72572-h.zip"
+        },
+        "download_count": 1146
+    },
+    {
+        "id": 20727,
+        "title": "The Cosmic Computer",
+        "authors": [
+            {
+                "name": "Piper, H. Beam",
+                "birth_year": 1904,
+                "death_year": 1964
+            }
+        ],
+        "translators": [],
+        "subjects": [
+            "Science fiction"
+        ],
+        "bookshelves": [
+            "Science Fiction"
+        ],
+        "languages": [
+            "en"
+        ],
+        "copyright": false,
+        "media_type": "Text",
+        "formats": {
+            "text/html": "https://www.gutenberg.org/ebooks/20727.html.images",
+            "text/html; charset=us-ascii": "https://www.gutenberg.org/files/20727/20727-h/20727-h.htm",
+            "application/epub+zip": "https://www.gutenberg.org/ebooks/20727.epub3.images",
+            "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/20727.kf8.images",
+            "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/20727.txt.utf-8",
+            "application/octet-stream": "https://www.gutenberg.org/files/20727/20727-page-images.zip",
+            "application/rdf+xml": "https://www.gutenberg.org/ebooks/20727.rdf",
+            "image/jpeg": "https://www.gutenberg.org/cache/epub/672/pg672.cover.medium.jpg"
+        },
+        "download_count": 275
+    },
+    {
+        "id": 729,
+        "title": "Hackers, Heroes of the Computer Revolution. Chapters 1 and 2",
+        "authors": [
+            {
+                "name": "Levy, Steven",
+                "birth_year": 1951,
+                "death_year": null
+            }
+        ],
+        "translators": [],
+        "subjects": [
+            "Computer hackers",
+            "Computer programming"
+        ],
+        "bookshelves": [],
+        "languages": [
+            "en"
+        ],
+        "copyright": true,
+        "media_type": "Text",
+        "formats": {
+            "text/html": "https://www.gutenberg.org/ebooks/729.html.images",
+            "application/epub+zip": "https://www.gutenberg.org/ebooks/729.epub3.images",
+            "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/729.kf8.images",
+            "application/rdf+xml": "https://www.gutenberg.org/ebooks/729.rdf",
+            "image/jpeg": "https://www.gutenberg.org/cache/epub/729/pg729.cover.medium.jpg",
+            "application/octet-stream": "https://www.gutenberg.org/cache/epub/729/pg729-h.zip",
+            "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/729.txt.utf-8"
+        },
+        "download_count": 192
+    },
+    {
+        "id": 672,
+        "title": "The Secret Guide to Computers",
+        "authors": [
+            {
+                "name": "Walter, Russ",
+                "birth_year": 1947,
+                "death_year": null
+            }
+        ],
+        "translators": [],
+        "subjects": [
+            "Microcomputers"
+        ],
+        "bookshelves": [],
+        "languages": [
+            "en"
+        ],
+        "copyright": true,
+        "media_type": "Text",
+        "formats": {
+            "text/html": "https://www.gutenberg.org/ebooks/672.html.images",
+            "application/epub+zip": "https://www.gutenberg.org/ebooks/672.epub3.images",
+            "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/672.kf8.images",
+            "application/rdf+xml": "https://www.gutenberg.org/ebooks/672.rdf",
+            "image/jpeg": "https://www.gutenberg.org/cache/epub/672/pg672.cover.medium.jpg",
+            "application/octet-stream": "https://www.gutenberg.org/files/672/672-0.zip",
+            "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/672.txt.utf-8"
+        },
+        "download_count": 58
+    },
+    {
+        "id": 59316,
+        "title": "Computers on the Farm: Farm Uses for Computers, How to Select Software and Hardware, and Online Information Sources in Agriculture",
+        "authors": [
+            {
+                "name": "Smith, Deborah Takiff",
+                "birth_year": null,
+                "death_year": null
+            }
+        ],
+        "translators": [],
+        "subjects": [
+            "Farms -- United States",
+            "Information storage and retrieval systems -- Agriculture",
+            "Microcomputers"
+        ],
+        "bookshelves": [],
+        "languages": [
+            "en"
+        ],
+        "copyright": false,
+        "media_type": "Text",
+        "formats": {
+            "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/59316.txt.utf-8",
+            "text/html": "https://www.gutenberg.org/ebooks/59316.html.images",
+            "text/html; charset=iso-8859-1": "https://www.gutenberg.org/files/59316/59316-h/59316-h.htm",
+            "application/epub+zip": "https://www.gutenberg.org/ebooks/59316.epub3.images",
+            "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/59316.kf8.images",
+            "text/plain; charset=iso-8859-1": "https://www.gutenberg.org/files/59316/59316-8.txt",
+            "application/rdf+xml": "https://www.gutenberg.org/ebooks/59316.rdf",
+            "image/jpeg": "https://www.gutenberg.org/cache/epub/59316/pg59316.cover.medium.jpg",
+            "application/octet-stream": "https://www.gutenberg.org/cache/epub/59316/pg59316-h.zip"
+        },
+        "download_count": 56
+    },
+    {
+        "id": 42613,
+        "title": "On-Line Data-Acquisition Systems in Nuclear Physics, 1969",
+        "authors": [
+            {
+                "name": "National Research Council (U.S.). Ad Hoc Panel on On-line Computers in Nuclear Research",
+                "birth_year": null,
+                "death_year": null
+            }
+        ],
+        "translators": [],
+        "subjects": [
+            "Nuclear physics -- Computer programs",
+            "Nuclear physics -- Information services",
+            "Online data processing"
+        ],
+        "bookshelves": [],
+        "languages": [
+            "en"
+        ],
+        "copyright": false,
+        "media_type": "Text",
+        "formats": {
+            "text/html": "https://www.gutenberg.org/ebooks/42613.html.images",
+            "text/html; charset=iso-8859-1": "https://www.gutenberg.org/files/42613/42613-h/42613-h.htm",
+            "application/epub+zip": "https://www.gutenberg.org/ebooks/42613.epub3.images",
+            "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/42613.kf8.images",
+            "text/plain; charset=iso-8859-1": "https://www.gutenberg.org/files/42613/42613-8.txt",
+            "application/rdf+xml": "https://www.gutenberg.org/ebooks/42613.rdf",
+            "image/jpeg": "https://www.gutenberg.org/cache/epub/42613/pg42613.cover.medium.jpg",
+            "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/42613.txt.utf-8",
+            "application/octet-stream": "https://www.gutenberg.org/cache/epub/42613/pg42613-h.zip"
+        },
+        "download_count": 49
+    }
+]

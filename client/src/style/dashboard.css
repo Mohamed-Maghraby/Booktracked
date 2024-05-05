@@ -1,0 +1,105 @@
+:root {
+    --border-color : #698680;
+    --place-holder-color : #98A2B3;
+    --Secondary-text-color  : rgb(74, 74, 74);
+    --Primary-Color-1 : #698680;
+    --Text-color-1 : #54716B;
+    --Text-color-2 : #ffffff;
+    --bg-color-1 : #F0F2F5;
+    --bg-color-2 : #f7f7f7
+}
+.dahsboard {
+    display: flex;
+    height: 5000px;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    align-items: flex-start;
+}
+.share {
+    /* border: 1px var(--border-color) solid; */
+    box-shadow: 0px 0px 2px 2px #0000001a;
+    border-radius: 8px;
+    padding: 0 0 30px 0;
+    width: 28rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.share-header {
+    background-color: var(--bg-color-2);
+    width: 100%;
+    text-align: start;
+    margin-bottom: 20px;
+}
+.share-header h3 {
+    color: var(--Secondary-text-color);
+    padding: 20px 20px;
+    margin: 0;
+}
+.share-select {
+    width: 80%;
+    padding: 20px 15px;
+    margin: 10px 0px;
+    /* border: none; */
+    box-sizing: content-box;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px
+}
+.upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: flex-start;
+    width: 80%;
+    box-shadow: 0px 0px 2px 2px #0000001a;
+    border-radius: 8px;
+    padding: 20px 15px;
+    margin: 10px 0px;
+}
+.upload-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 30px 0;
+}
+
+.upload-icon-wrapper {
+    border-radius: 50%;
+    padding: 15px;
+    background-color: var(--bg-color-1);
+}   
+.upload-text {
+    text-align: start;  
+}   
+.upload-text > :nth-child(1) {
+    font-size: 16px;
+    color: var(--Secondary-text-color);
+    display: inline-block;
+    margin: 5px 5px;
+}
+.upload-text > :nth-child(2) {
+    font-size: 18px;
+    display: inline-block;
+    margin: 5px 5px;
+    text-align: start;
+}
+.upload-text > :nth-child(4) {
+    font-size: 12px;
+    display: inline-block;
+    margin: 0 0 10px 5px;
+}
+.select-file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.select-file {
+    display: none;
+}

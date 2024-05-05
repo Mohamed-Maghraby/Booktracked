@@ -1,0 +1,96 @@
+:root {
+    --Text-color-1 : #54716B;
+    --Text-color-2 : #ffffff;
+    --Primary-Color-1 : #698680;
+}
+.sidebar {
+    width: 18rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 0px #00000021;
+    margin-left: -8px;
+    transition: 0.3s all;
+}
+
+.sidebar .menu {
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+}
+
+.sidebar .menu img {
+    padding: 15px;
+    cursor: pointer;
+    width: 45px;
+}
+
+.sidebar nav {
+
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1.5px #00000014 solid;
+    padding: 15px 15px;
+    gap: 20px;
+}
+
+.sidebar nav ul li .active {
+    background-color: #f7f7f7;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #f7f7f7;
+}
+
+
+.sidebar nav ul li a span {
+    display: block;
+    color: black;
+    font-size: 16px;
+}
+
+
+.collapsed-sidebar {
+    width: 4.5rem;
+}
+
+.collapsed-a {
+    justify-content: center;
+    transition-property: none;
+
+}
+
+.collapsed-span {
+    display: none !important;
+    transition-property: none;
+
+}
+
+/*Sidebar User Profile*/
+
+.sidebar .sidebar-profile {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+    gap: 0px 15px;
+    border-bottom: 1.5px #00000014 solid;
+}
+
+.sidebar .sidebar-profile .avatar {
+    width: 40px;
+    cursor: pointer;
+}
+.sidebar .sidebar-profile .username {
+    font-weight: 600;
+}

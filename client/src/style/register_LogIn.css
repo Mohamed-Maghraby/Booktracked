@@ -1,0 +1,102 @@
+:root {
+    --border-color : #698680;
+    --place-holder-color : #98A2B3;
+    --Secondary-text-color  : rgb(92, 92, 92);
+    --Primary-Color-1 : #698680;
+    --Text-color-1 : #54716B;
+    --Text-color-2 : #ffffff;
+}
+
+.register, .logIn {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-content, .logIn-content{
+    display: flex;
+    justify-content: center;;
+    flex-direction: column;
+    width: fit-content;
+    padding: 20px 50px;
+    border-radius: 10px;
+    border: 1px var(--border-color) solid;
+}
+.register-header, .logIn-header {
+    margin-bottom: 15px;
+}
+.register-header h2, .logIn-header h2{
+    margin: 10px 0;
+}
+.register-header p, .logIn-header p {
+    color: var(--Secondary-text-color);
+}
+.register-content form, .logIn-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.register-content label, .logIn-content label {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+.register-content input, .logIn-content input {
+    padding: 14px 10px;
+    margin: 5px 0 5px 0;
+    width: 320px;
+    border-radius: 6px;
+    border: 1.6px var(--border-color) solid;
+    outline: none;
+}
+.register-content input::placeholder {
+    color: var(--place-holder-color);
+    font-size: 14px;
+}
+.logIn-content input::placeholder {
+    color: var(--place-holder-color);
+    font-size: 14px;
+}
+.register-content input:focus {
+    box-shadow: 0px 2px 4px 0px #0000001a;
+}
+.logIn-content input:focus {
+    box-shadow: 0px 2px 4px 0px #0000001a;
+}
+.register-content form > :nth-child(2n+3) {
+    margin-top: 15px;
+}
+.logIn-content form > :nth-child(2n+3) {
+    margin-top: 15px;
+}
+.register-content .register-button, .logIn-content .logIn-button  {
+    width: 100%;
+}
+.register-content .terms, .logIn-content .terms {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+.register-content .terms input, .logIn-content .terms input {
+    width: 18px !important;
+    height: 18px;
+}
+.register-content .terms input:checked {
+    color: var(--Primary-Color-1);
+}
+.logIn-content .terms input:checked {
+    color: var(--Primary-Color-1);
+}
+.register-content a, .register-footer a, .logIn-content a, .logIn-footer a {
+    font-size: 14px;
+    color: var(--Text-color-1);
+}
+.register-footer, .logIn-footer {
+    margin: 20px 0 0 0;
+}
