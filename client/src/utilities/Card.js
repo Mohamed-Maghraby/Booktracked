@@ -49,6 +49,8 @@ function Card(props) {
         setOddBookId(extracted_body.book_id);
 
         timedInfo()
+
+        let testVar;
     }
 
     return (
