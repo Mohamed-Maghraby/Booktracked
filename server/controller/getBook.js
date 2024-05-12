@@ -19,6 +19,7 @@ async function getBook(req, res) {
     database.query(query, [user_id], (err, results) => {
         if (err) {
         console.error('Error executing SQL query:', err);
+        res.json({message : "from here"})
         return;
         }
         // console.log(results);

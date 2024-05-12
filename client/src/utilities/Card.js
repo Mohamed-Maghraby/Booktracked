@@ -50,7 +50,6 @@ function Card(props) {
 
         timedInfo()
 
-        let testVar;
     }
 
     return (
