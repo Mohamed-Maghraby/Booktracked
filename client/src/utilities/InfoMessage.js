@@ -1,8 +1,10 @@
+import Icon from "./Icon";
 
 function InfoMessage (props) {
     return (
         <div className='info-message'>
-            <p>{props.InfoMessage}</p>
+            {props.iconElement}
+            <p className="inner-text">{props.InfoMessage}</p>
         </div>
     )
 }

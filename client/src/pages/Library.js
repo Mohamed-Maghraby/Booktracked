@@ -59,7 +59,7 @@ function Library() {
         let author = item.author
 
         return (
-          <div className="card-wrapper">
+          <div className="library-book-wrapper">
             <img className="book-cover" src={cover}></img>
             <h2 className="book-title" title={title}>{title}</h2>
             <span className="author" title={author}>{author}</span>

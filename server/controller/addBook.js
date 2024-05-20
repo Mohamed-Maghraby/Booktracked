@@ -27,14 +27,15 @@ async function addBook(req, res) {
     database.query(query2, values2, (error, result) => { 
          if (error) {
             if (error.errno == 1062) {
-                res.json({message : 'The book is aleady in your library', errno: error.errno});
+                res.json({message : 'The book is aleady in your library', insertionCode: error.errno});
             }
             console.error('Error executing query:', error.code);
         } else { 
             console.log('Query executed successfully');
-            res.json({message : 'The book has been added to your library'});
+            res.json({message : 'The book has been added to your library', insertionCode: 1062});
         }
     });
+
     
 }
 

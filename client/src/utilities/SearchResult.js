@@ -37,7 +37,7 @@ function SearchResult (props) {
         
         
         
-        return <Card key={book_id} book_id={book_id} cover={cover} title={title} author={author} download_html={download_html}></Card>
+        return <Card key={book_id} book_id={book_id} cover={cover} title={title} author={author} download_html={download_html} isBookExists = {props.isBookExists}></Card>
     })
     
     return (
