@@ -62,10 +62,14 @@ app.use('/getBook', getBookRouter)
 /*user router, contains all user features logn in, register ... */
 app.use('/user', userRouter);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 /*test html  */
 app.get('/getmehtml', (req, res) => {
-    res.sendFile('Testbook.html', { root: path.join(__dirname, 'views') }); // Assuming your HTML is in 'views' directory
-  });
+    res.type('application/epub+zip'); // Set the content type
+    res.sendFile(path.join(__dirname, 'public', 'alice.epub'));
+});
   
 
 /*setting up ports */

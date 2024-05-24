@@ -11,6 +11,8 @@
     "quill": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-epub-viewer": "^0.2.0",
+    "react-reader": "^2.0.10",
     "react-router-dom": "^6.21.2",
     "react-scripts": "5.0.1",
     "usehooks-ts": "^3.1.0",

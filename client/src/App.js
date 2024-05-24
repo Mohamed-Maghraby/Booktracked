@@ -10,6 +10,7 @@ import BookReader from './pages/BookReader';
 import Reader2 from './pages/Reader2'
 import Logout from './pages/Logout';
 import BookPublic from './pages/BookPublic';
+import Viewer from './pages/Viewer'
 
 function App() {
   let stat =  localStorage.getItem("IsLoggedIn")
@@ -31,6 +32,7 @@ function App() {
             <Route path='/BookReader' element={<BookReader/>}></Route>
             <Route path='/Reader2' element={<Reader2/>}></Route>
             <Route path='/bookPublic' element={<BookPublic/>}></Route>
+            <Route path='/viewer' element={<Viewer/>}></Route>
           </Routes>
       </div>
   );

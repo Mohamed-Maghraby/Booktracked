@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en">
+  <head>
+    <meta name="dtb:uid" content="http://www.gutenberg.org/2131"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:generator" content="Ebookmaker 0.12.42 by Project Gutenberg"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>An Account of Egypt</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="np-1" playOrder="1">
+      <navLabel>
+        <text>AN ACCOUNT OF EGYPT</text>
+      </navLabel>
+      <content src="8417763409314174522_2131-h-0.htm.xhtml#pgepubid00000"/>
+    </navPoint>
+    <navPoint id="np-2" playOrder="2">
+      <navLabel>
+        <text>Translated By G. C. Macaulay</text>
+      </navLabel>
+      <content src="8417763409314174522_2131-h-0.htm.xhtml#pgepubid00001"/>
+    </navPoint>
+    <navPoint id="np-3" playOrder="3">
+      <navLabel>
+        <text>NOTE</text>
+      </navLabel>
+      <content src="8417763409314174522_2131-h-0.htm.xhtml#pgepubid00002"/>
+    </navPoint>
+    <navPoint id="np-4" playOrder="4">
+      <navLabel>
+        <text>AN ACCOUNT OF EGYPT</text>
+      </navLabel>
+      <content src="8417763409314174522_2131-h-0.htm.xhtml#pgepubid00003"/>
+    </navPoint>
+    <navPoint id="np-5" playOrder="5">
+      <navLabel>
+        <text>BEING THE SECOND BOOK OF HIS HISTORIES CALLED EUTERPE</text>
+      </navLabel>
+      <content src="8417763409314174522_2131-h-0.htm.xhtml#pgepubid00004"/>
+    </navPoint>
+    <navPoint id="np-6" playOrder="6">
+      <navLabel>
+        <text>THE FULL PROJECT GUTENBERG LICENSE</text>
+      </navLabel>
+      <content src="8417763409314174522_2131-h-1.htm.xhtml#pg-footer-heading"/>
+    </navPoint>
+  </navMap>
+</ncx>
