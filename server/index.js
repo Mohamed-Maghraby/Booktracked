@@ -3,6 +3,8 @@ const dotenv = require('dotenv')
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const fs = require('fs');
+const File = require('./functions/file'); 
 
 
 
@@ -63,10 +65,70 @@ app.use('/getBook', getBookRouter)
 app.use('/user', userRouter);
 
 /*test html  */
-app.get('/getmehtml', (req, res) => {
-    res.sendFile('Testbook.html', { root: path.join(__dirname, 'views') }); // Assuming your HTML is in 'views' directory
-  });
-  
+// app.get('/getmehtml', (req, res) => {
+//     res.sendFile('Testbook.html', { root: path.join(__dirname, 'views') }); // Assuming your HTML is in 'views' directory
+//   });
+
+
+
+
+const bookFilePath = path.join(__dirname, 'views', 'New-Prince.html');
+console.log(bookFilePath);
+
+// File.txtToHTML(bookFilePath, 'New-Prince', { minLetters: 4, minParagraphs: 2 });
+
+// Function to read a specific portion of the book
+function getBookSection(startIndex, endIndex) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(bookFilePath, 'utf-8', (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                const section = data.slice(startIndex, endIndex);
+                resolve(section);
+            }
+        });
+    });
+}
+
+app.get('/getmehtml', async (req, res) => {
+    const start = parseInt(req.query.start, 10) || 0;
+    const end = parseInt(req.query.end, 10) || 10000; // Default to 1000 characters if no end is provided
+    try {
+        const section = await getBookSection(start, end);
+        res.send(section);
+    } catch (error) {
+        res.status(500).send('Error reading book section');
+    }
+});
+
+app.post('/saveeditedcontent', (req, res) => {
+    const { content, startIndex, endIndex, delta } = req.body;
+    console.log("Request received");
+
+    // const filePath = path.join(__dirname, 'views', 'Prince.txt');
+
+    // Read the HTML file
+    fs.readFile(bookFilePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error reading file.');
+        }
+
+        // Replace the content between startIndex and endIndex with the new content
+        const newData = data.slice(0, startIndex) + content + data.slice(endIndex);
+
+        // Write the new data back to the file
+        fs.writeFile(bookFilePath, newData, 'utf8', (err) => {
+            if (err) {
+                return res.status(500).send('Error writing to file.');
+            }
+
+            res.send('Content saved successfully.');
+        });
+    });
+});
+
+
 
 /*setting up ports */
 app.listen(3001, ()=>{

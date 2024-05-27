@@ -1,0 +1,32 @@
+.quill-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.book-reader {
+    width: 70% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 150px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 20px;
+}
+.book-reader >  {
+    width: 80%;
+    overflow: hidden;
+
+}
+.book-reader p {
+    margin: 15px 0;
+    font-size: 18px;
+    line-height: 1.8 !important;
+    word-spacing: 1.5px;
+
+}
+/* .book-reader .ql-tooltip {
+    width: 30% !important;
+    height: auto !important;
+} */
