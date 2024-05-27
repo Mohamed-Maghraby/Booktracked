@@ -70,7 +70,12 @@ app.get('/getmehtml', (req, res) => {
     res.type('application/epub+zip'); // Set the content type
     res.sendFile(path.join(__dirname, 'public', 'alice.epub'));
 });
-  
+
+//host epup file as static file and serve it whenever clint request it file name is ss
+
+
+
+
 
 /*setting up ports */
 app.listen(3001, ()=>{
