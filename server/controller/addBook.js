@@ -5,6 +5,7 @@ async function addBook(req, res) {
 
     const data = await req.body;
     console.log(data)
+    console.log(data.download_html);
 
     const query = 'INSERT INTO books (book_id, title, author, cover, download_html) VALUES (?, ?, ?, ?, ?)';
     const values = [data.book_id, data.title, data.author, data.cover, data.download_html];

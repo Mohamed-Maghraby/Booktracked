@@ -48,6 +48,8 @@ function Card(props) {
         setMessage(res.message);
         setInsertionCode( (prevInsertionCode) => prevInsertionCode = res.insertionCode)
 
+        console.log(data.download_html);
+
         if (response.status == 401) {
             console.log(response.status);
             setlogOutUnauthorized(true)

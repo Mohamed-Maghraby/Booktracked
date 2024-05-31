@@ -12,6 +12,7 @@ const searchRouter = require('./routers/searchRouter');
 const addBookRouter = require('./routers/addBookRouter');
 const getBookRouter = require('./routers/getBookRouter');
 const userRouter = require('./routers/userRouter');
+const readBookRouter = require('./routers/readBookRouter');
 
 const app = express();
 
@@ -62,19 +63,21 @@ app.use('/getBook', getBookRouter)
 /*user router, contains all user features logn in, register ... */
 app.use('/user', userRouter);
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-/*test html  */
-app.get('/getmehtml', (req, res) => {
-    res.type('application/epub+zip'); // Set the content type
-    res.sendFile(path.join(__dirname, 'public', 'alice.epub'));
-});
-
-//host epup file as static file and serve it whenever clint request it file name is ss
+/*user router, contains all user features logn in, register ... */
+app.use('/readBook', readBookRouter);
 
 
 
+// Serve the file in server
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+// app.get('/getmehtml', (req, res) => {
+//     // res.type('application/epub+zip'); // Set the content type
+//     res.sendFile(path.join(__dirname, 'public', 'alice.epub'));
+// });
+
+
+// app.use('/static', express.static(path.join(__dirname, 'public')))
 
 
 /*setting up ports */

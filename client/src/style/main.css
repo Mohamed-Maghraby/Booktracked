@@ -249,3 +249,7 @@
     border-top-left-radius: 10px;
     background-color: green;
   }
+
+.reader-sp {
+    font-size: 50px !important;
+}

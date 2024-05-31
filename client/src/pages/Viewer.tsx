@@ -26,7 +26,7 @@ function Viewer() {
       }}
     >
       <ReactReader
-        url="http://localhost:3001/getmehtml"
+        url="http://localhost:3001/public/alice.epub"
         location={location}
         locationChanged={(epubcfi: string) => setLocation(epubcfi)}
         showToc={true}
