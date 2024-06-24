@@ -1,49 +1,39 @@
-// import React, { useState } from "react";
-// import { ReactReader } from "react-reader";
-
-// function ViewerTest() {
-//   const [location, setLocation] = useState(0);
-
-//   async function getHtmlBook() {
-//     const response = await fetch("http://localhost:3000/alice.epub", {
-//       method: "GET",
-//       credentials: "include",
-//       headers: {
-//         "Content-type": "application/xml",
-//         // Authorization': `Bearer ${token}`, // notice the Bearer before your token
-//       },
-//     });
-//     const data = await response.text();
-//     console.log(data);
-//     return data;
-//   }
-
-//   return (
-//     <div
-//       style={{
-//         height: "100vh",
-//         width: "90vw",
-//       }}
-//     >
-//       <ReactReader
-//         url="http://localhost:3001/public/alice.epub"
-//         location={location}
-//         locationChanged={(epubcfi) => setLocation(epubcfi)}
-//         showToc={true}
-//       />
-//     </div>
-//   );
-// }
-// export default ViewerTest;
-
 import React, { useState, useRef, useEffect } from "react";
 import { ReactReader } from "react-reader";
 import Sidebar from "utilities/Sidebar";
+import Popup from "utilities/Popup";
+import { EpubCFI } from 'epubjs';
+import {Rendition} from 'epubjs';
+import Toolbar from "utilities/Toolbar";
+import { useLocation } from "react-router-dom";
+
+var intersectRect = require('intersect-rect');
+let Clash = require("../functions/Clash")
 
 function ViewerTest() {
 
 
 
+  async function save_annotation_db(annotation, book_id) {
+
+    const requestOptions = {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        // Authorization': `Bearer ${token}`, // notice the Bearer before your token
+      },
+      body: JSON.stringify({ annotation: annotation, book_id: book_id })
+    }
+
+    const response = await fetch('http://localhost:3001/addAnnotation', requestOptions);
+    const res = await response.json();
+    console.log(res);
+
+  }
+
+
+  /*The initail epub book style object passed to the reader to style the book reader */
   const ReactReaderStyle = {
     container: {
       overflow: "hidden",
@@ -190,14 +180,26 @@ function ViewerTest() {
     }
   };
 
-
-
-
   const [location, setLocation] = useState(null);
   const readerRef = useRef(null);
   const [book, setBook] = useState(null);
-  const [triggerToolBar, setTriggerToolBar] = useState(false);
   const [rendition, setRendition] = useState(null);
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [markedCfi, setMarkedCfi] = useState(null);
+  const [deAnnotated, setDeAnnotated] = useState(false);
+  const [coordinates, setCoordinates] = useState({});
+
+  const transfare = useLocation();
+  const book_id = transfare.state?.book_id; // Access the data using optional chaining
+  const servingUrl = transfare.state?.servingUrl; // Access the data using optional chaining
+
+  window.addEventListener('unload', () => {
+    console.log("I am closing");
+    save_annotation_db(window.localStorage.getItem(`${book_id}_annotations`), book_id);
+
+  });
+
+
 
   useEffect(() => {
     if (readerRef.current && readerRef.current.readerRef.current) {
@@ -206,159 +208,170 @@ function ViewerTest() {
     }
   }, [readerRef]);
 
+  //initialize the reader theme and set up instruction that should be loaded when the reader is ready
   useEffect(() => {
-    /*
-    You set flow & Spread from rendition object dirctly either from here or 
-    from getRendition in prop, or set them with epubOptions props 
-    */
 
     if (rendition) {
+      console.log(rendition);
+
+      /*You set flow & Spread from rendition object dirctly either from here or 
+      from getRendition in prop, or set them with epubOptions props*/
       rendition.themes.default({
         '::selection': {
-          'background': '#b5ece0'
+          'background': '#b5ece0',
         }
       });
+
       rendition.themes.fontSize('120%');
       rendition.themes.font('Arial');
-    }
 
+      rendition.on("markClicked", (cfiRange, data) => {
+
+        const ePubCfi = new EpubCFI(cfiRange);
+        console.log(ePubCfi);
+
+        let boundries = rendition.getRange(ePubCfi).getBoundingClientRect();
+        let coordinates = { top: boundries.top, left: boundries.left, right: boundries.right, bottom: boundries.bottom };
+
+        setCoordinates(coordinates);
+        setMarkedCfi(cfiRange);
+        setDeAnnotated(true);
+        setIsCollapsed(false)
+
+
+      });
+
+      rendition.on("selected", (cfiRange, data) => {
+        /** 
+         * Implement a function that retrives all of the annotation and compare the current slected cfi with all of cfis of annotations
+         * use Clash.clashCfiRange to compare the two cfis, make sure to just bring those cfies from highlgiths and underlines,
+         * particular section cfis, and not all of the cfis
+         */
+        setDeAnnotated(false);
+      });
+
+      //Load stored annotations when the book is loaded
+      rendition.on("started", (event, section) => {
+
+        console.log(servingUrl);
+
+        if (localStorage.getItem(`${book_id}_annotations`)) {
+          console.log(book_id);
+          const storedAnnotations = JSON.parse(window.localStorage.getItem(`${book_id}_annotations`));
+          const annotationsArray = Object.values(storedAnnotations);
+          annotationsArray.map(annotation => {
+            rendition.annotations.add(annotation.type, annotation.cfiRange, {}, () => { }, annotation.className, annotation.styles);
+          })
+        }
+      });
+      
+    
+
+      // rendition.on("rendered", (event, section) => {
+      //   let highlightsArray = Object.values(section.highlights)
+      //   highlightsArray.map(highligh => highligh.element.addEventListener('click', () => { 
+      //     console.log("You hoverd over me") 
+      //     console.log(highligh.element.children[0]);
+      //   })); 
+      // });
+
+
+    }
   }, [book, rendition]);
 
-
-
-  function triggerSelection() {
-    book.rendition.getContents().forEach((contents) => {
-      console.log(contents);
+  function annotateText(annotationType) {
+    book.rendition.getContents().forEach(contents => {
       const selection = contents.window.getSelection();
-      console.log(selection);
-      // Iterate through all ranges in the selection
-      for (let i = 0; i < selection.rangeCount; i++) {
-        
-        
-        const range = selection.getRangeAt(i);
 
-        if (range.startContainer === range.endContainer) {
-          
+      if (!selection.isCollapsed) {
+
+        const range = selection.getRangeAt(0)
+        let ePubCfi = contents.cfiFromRange(range)
+
+        let isCfiClash = markedCfi && Clash.clashCfiRange(ePubCfi, markedCfi)
+        console.log(isCfiClash);
+
+        setMarkedCfi((prev) => prev = null);
+
+        if (isCfiClash === true) {
+          return;
         }
 
-        // Ignore ranges that contain only whitespace
-        if (!range.toString().trim()) {
-            continue;
+        function callBackfn() {
+          console.log("I Annotte");
         }
 
-        // Surround the range contents with a span
-        const newSpan = document.createElement('span');
-        newSpan.style.textDecoration = 'underline';
-        range.surroundContents(newSpan);
+
+        /** 
+         *   type (string) Type of annotation to add: "highlight", "underline", "mark"
+         *   cfiRange (EpubCFI) EpubCFI range to attach annotation to
+         *   data (object) Data to assign to annotation
+         *   cb (function?) Callback after annotation is added
+         *   className (string) CSS class to assign to annotation
+         *   styles (object) CSS styles to assign to annotation
+        */
+
+        let annotationStyle = annotationType === "highlight" ? { "fill": "yellow", "fill-opacity": "0.3", "mix-blend-mode": "multiply" } : { 'stroke': 'none', 'stroke-opacity': '1', "mix-blend-mode": "multiply" };
+        rendition.annotations.add(annotationType, ePubCfi, {}, callBackfn, 'class-to-annotate', annotationStyle)
+        console.log(rendition.annotations);
+
       }
-
-    });
+      else {
+        return;
+      }
+      window.localStorage.setItem(`${book_id}_annotations`, JSON.stringify(rendition.annotations._annotations));
+      console.log("I DOOO");
+    })
   }
 
-  // function triggerSelection() {
-  //   book.rendition.getContents().forEach(contents => {
-  //     console.log(contents);
-  //     const selection = contents.window.getSelection();
-  //     console.log(selection);
-  //     if (!selection.isCollapsed) {
-  //       const range = selection.getRangeAt(0)
-  //       let ePubCfi = contents.cfiFromRange(range)
-  //       // let annotations = new rendition.Annotations(rendition)
-  //       // addAnnotation(range)
-  //       console.log(ePubCfi);
-  //       function callBackfn() {
-  //         console.log("I Annotte");
-  //       }
-  //       // console.log(rendition);
-  //       // rendition.annotations.add(
-  //       //     'highlight',
-  //       //     ePubCfi,
-  //       //     {},
-  //       //     undefined,
-  //       //     'hl',
-  //       //     { fill: 'red', 'fill-opacity': '0.5'}
-  //       // )
-  //       // rendition.annotations.add('underline',ePubCfi,{}, callBackfn, '.class-to-annotate', {fill: 'yellow','fill-opacity': '0.6'})
-  //       // console.log(rendition.annotations.add('highlight',ePubCfi,{data : 'dumb'}, callBackfn, 'class-to-annotate', {backgroundColor:"red"}));
+  function UnAnnotete(cfiRange, annotationType) {
+    rendition.annotations.remove(cfiRange, annotationType);
 
-  //       /**
-  //        *  type (string) Type of annotation to add: "highlight", "underline", "mark"
-  //           cfiRange (EpubCFI) EpubCFI range to attach annotation to
-  //           data (object) Data to assign to annotation
-  //           cb (function?) Callback after annotation is added
-  //           className (string) CSS class to assign to annotation
-  //           styles (object) CSS styles to assign to annotation
- 
-  //        */
+  }
 
+  function triggerHighlight() {
+    let annotationType = "highlight";
+    annotateText(annotationType);
+  }
+  function triggerUnderline() {
+    let annotationType = "underline";
+    annotateText(annotationType);
+  }
 
-  //       // cfiRange.commonAncestorContainer.style.backgroundColor='red'
-  //       // console.log(cfiRange.commonAncestorContainer.style);
-  //       // console.log(range.startContainer);
-  //       // console.log(range.toString() + "fff");
-  //       let newSpan = document.createElement('span')
-  //       // cfiRange.surroundContents(newSpan)
-  //       // console.log(cfiRange.surroundContents('span'));
-  //       // console.log(cfiRange.extractContents());
+  function unHighlight() {
+    let annotationType = "highlight";
+    UnAnnotete(markedCfi, annotationType);
+  }
 
-  //       const fragment = range.extractContents();
-  //       newSpan.appendChild(fragment)
-  //       range.insertNode(newSpan);
-  //       // newSpan.style.backgroundColor='red'
-  //       newSpan.style.textDecoration = 'underline'
-  //       // newSpan.style.display = 'block'
-
-  //     }
-  //   })
-  // }
+  function unUnderline() {
+    let annotationType = "underline";
+    UnAnnotete(markedCfi, annotationType);
+  }
 
   function loadToolBar() {
-    setTriggerToolBar(true);
-    console.log("I am here");
+    setIsCollapsed(false);
   }
 
+  function handleCollapse() {
+    setIsCollapsed(true)
+  }
+
+  function closePopup() {
+  }
 
   const onLocationChanged = (epubcfi) => {
     setLocation(epubcfi);
   };
 
-  /**
-   * {triggerToolBar && (
-        <div style={{ position: "absolute" , top : '150px'}}>
-          <button onClick={triggerSelection}>Highlight</button>
-          <button>Underline</button>
-          <button>Mark</button>
-        </div>
-      )}
-   */
-
-  const customStyles = {
-    container: {
-      padding: "20px",
-      backgroundColor: "#f4f4f4", // Example of adding a custom background color
-    },
-    readerArea: {
-      border: "1px solid #ddd", // Example of adding a border
-    },
-    // Add other styles you want to override
-  };
-
-
-  const addAnnotation = (cfiRange, data) => {
-    book.rendition.annotations.add("highlight", cfiRange, {}, (e) => {
-      console.log("Annotation clicked", e.target);
-    }, "hl", { "fill": "yellow" });
-    book.rendition.annotations.add("underline", cfiRange, {}, null, "ul", { "stroke": "blue" });
-  };
   return (
-
-    <div className="library">
+    <div className="library" >
       <Sidebar></Sidebar>
       <div className='content'>
         <div style={{ height: "100vh", width: "75vw" }}>
           <ReactReader
             ref={readerRef}
-            url="http://localhost:3001/public/alice.epub"
+            // url="http://localhost:3001/public/alice.epub"
+            url={`http://localhost:3001${servingUrl}`}
             location={location}
             locationChanged={onLocationChanged}
             showToc={true}
@@ -381,19 +394,23 @@ function ViewerTest() {
             }}
 
           />
-          {/* Render TOC and add click handlers */}
         </div>
-        {triggerToolBar && (
-        <div style={{ position: "absolute" , top : '0'}}>
-          <button onClick={triggerSelection}>Highlight</button>
-          <button>Underline</button>
-          <button>Mark</button>
-        </div>
-      )}
+
+        {/* {isCollapsed ? false : ( // Conditionally render toolbar
+          <div className="toolbar" style={{ position: "absolute", top: "0" }}>
+            <button onClick={triggerHighlight}>Highlight</button>
+            <button>Underline</button>
+            <button>Mark</button>
+            <button onClick={handleCollapse}>Close Toolbar</button>
+          </div>
+        )} */}
+
+        {!isCollapsed && <Toolbar triggerHighlight={triggerHighlight} unHighlight={unHighlight} handleCollapse={handleCollapse} deAnnotated={deAnnotated} triggerUnderline={triggerUnderline} unUnderline={unUnderline} coordinates={coordinates}></Toolbar>}
+
+        {/* {popupToggle && userAnnotate && <Popup message="This is a message in the popup." onClose={closePopup}/>} */}
+
       </div>
     </div>
-
-
   );
 }
 

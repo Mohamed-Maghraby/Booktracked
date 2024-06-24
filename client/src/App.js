@@ -10,6 +10,8 @@ import Logout from './pages/Logout';
 import BookPublic from './pages/BookPublic';
 import Viewer from './pages/Viewer';
 import ViewerTest from 'pages/ViewerTest';
+import LogInOptions from 'pages/LogInOptions';
+import ManageUser from 'pages/ManageUser';
 
 function App() {
   let stat =  localStorage.getItem("IsLoggedIn")
@@ -26,11 +28,13 @@ function App() {
             <Route path='/library' element={<Library/>}></Route>
             <Route path='/register' element={<Register/>}></Route>
             <Route path='/logIn' element={<LogIn/>}></Route>
+            <Route path='/LogInOptions' element={<LogInOptions/>}></Route>
             <Route path='/logout' element={<Logout/>}></Route>
             <Route path='/dashboard' element={<Dashboard/>}></Route>
             <Route path='/bookPublic' element={<BookPublic/>}></Route>
             <Route path='/viewer' element={<Viewer/>}></Route>
             <Route path='/viewerTest' element={<ViewerTest/>}></Route>
+            <Route path='/ManageUser' element={<ManageUser/>}></Route>
           </Routes>
       </div>
   );

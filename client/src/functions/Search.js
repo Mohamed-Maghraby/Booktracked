@@ -8,7 +8,7 @@ function Search () {
     // fetch(`https://openlibrary.org/search.json?q=${paramString}`)
 
     const [userInput, setUserInput] = useState("")
-    const [searchData, setSearchData] = useState()
+    const [searchData, setSearchData] = useState(null)
     const [searchResults, setSearchResults] = useState(false)
     const [isBookExists, setIsBookExists] = useState({})
 
@@ -53,7 +53,7 @@ function Search () {
                     <Button styleClass="search-button button" textContent="Search" handleClick={handleClick}>Search</Button>
                 </div>
                 {searchData && searchResults && <SearchResult searchdata={searchData} isBookExists={isBookExists}></SearchResult>}
-                {searchData == undefined ? <div className="no-results">Sorry! No Results</div> : null}
+                {searchData == false ? <div className="no-results">Sorry! No Results</div> : null}
             </div>
     )
 } 

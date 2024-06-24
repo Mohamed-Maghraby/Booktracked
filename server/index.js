@@ -4,15 +4,14 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
-
-
-
 const database = require('./model/database')
 const searchRouter = require('./routers/searchRouter');
 const addBookRouter = require('./routers/addBookRouter');
 const getBookRouter = require('./routers/getBookRouter');
+const loadBookRouter = require('./routers/loadBookRouter');
+const addAnnotationRouter = require('./routers/addAnnotationRouter');
 const userRouter = require('./routers/userRouter');
-const readBookRouter = require('./routers/readBookRouter');
+const adminRouter = require('./routers/adminRouter');
 
 const app = express();
 
@@ -29,25 +28,37 @@ const corsOptions ={
 }
 app.use(cors(corsOptions));
 
-
 /*Usee cookie */
 app.use(cookieParser())
 
+// /*Enable post request body*/
+// app.use(express.json());
+// app.use(express.urlencoded({extended : true}));
 
-/*Enable post request body*/
-app.use(express.json());
-app.use(express.urlencoded({extended : true}));
+// Middleware to parse JSON bodies with increased size limit
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 
-/*Connect to database */
-database.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    console.log('Connected to the database!');
-});
+database.getConnection((err, connections)=>{
+    connections.connect((err) => {
+        if (err) {
+            console.error('Error connecting to the database:', err);
+            return;
+        }
+        console.log('Connected to the database!');
+    });
+})
 
+
+// /*Connect to database */
+// database.connect((err) => {
+//     if (err) {
+//         console.error('Error connecting to the database:', err);
+//         return;
+//     }
+//     console.log('Connected to the database!');
+// });
 
 /*Router & APIs */
 
@@ -60,11 +71,20 @@ app.use('/addBook', addBookRouter)
 /*get book*/
 app.use('/getBook', getBookRouter)
 
+/*load book*/
+app.use('/loadBook', loadBookRouter)
+
+/*add annotation*/
+app.use('/addAnnotation', addAnnotationRouter)
+
 /*user router, contains all user features logn in, register ... */
 app.use('/user', userRouter);
 
-/*user router, contains all user features logn in, register ... */
-app.use('/readBook', readBookRouter);
+/*Admin router, contains all user features logn in, register ... */
+app.use('/admin', adminRouter);
+
+
+
 
 
 

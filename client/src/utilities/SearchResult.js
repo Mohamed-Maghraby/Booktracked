@@ -29,8 +29,8 @@ function SearchResult (props) {
         console.log(item.authors);
         let book_id = item.id;
         let cover = item.formats["image/jpeg"];
-        // let download_html = item.formats["text/html"];
-        let download_html = item.formats["application/epub+zip"];
+        let download_html = item.formats["text/html"];
+        let download_epub = item.formats["application/epub+zip"];
         let title = item.title;
         let author = item.authors[0] ? item.authors[0].name : "Unknown Author"
         // const author = item.authors?.[0]?.name || "Unknown Author";
@@ -38,7 +38,7 @@ function SearchResult (props) {
         
         
         
-        return <Card key={book_id} book_id={book_id} cover={cover} title={title} author={author} download_html={download_html} isBookExists = {props.isBookExists}></Card>
+        return <Card key={book_id} book_id={book_id} cover={cover} title={title} author={author} download_html={download_html} download_epub={download_epub} isBookExists = {props.isBookExists}></Card>
     })
     
     return (

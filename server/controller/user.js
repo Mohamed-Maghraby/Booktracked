@@ -156,6 +156,9 @@ async function register (req, res) {
         })
        await res.json({
             message: "User Registerd Successfully",
+            username : username,
+            userType : 'user'
+
             // userToken: generateToken(userId, username)
         })
     }
@@ -239,6 +242,7 @@ async function login (req, res) {
         res.json({
             message: "You are Logged In",
             username : storedUsername,
+            userType : 'user'
         })
 
         return; 

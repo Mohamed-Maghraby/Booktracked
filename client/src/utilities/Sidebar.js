@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 import Icon from './Icon';
 import menuIcon from '../images/Menu.svg'
 import fakeAvatar from '../images/avatar.svg'
+import { useReadLocalStorage } from 'usehooks-ts'
+
 
 function Sidebar(props) {
 
@@ -14,16 +16,19 @@ function Sidebar(props) {
     console.log(props.val + " this is val"); 
 
     const [collapsed, setCollapsed] = useState(false)
+    const userType = useReadLocalStorage('user-type')
 
 
     function handleCollapsedSidebar (){
         setCollapsed(!collapsed);
+        console.log(userType);
     }
 
     return (
             <div className={`sidebar ${collapsed ? 'collapsed-sidebar' : ''}`}>
                 <div className='menu'>
                     <img src={menuIcon} onClick={handleCollapsedSidebar} title={`${collapsed ? 'Collapse Menu' : 'Toggle Menu'}`}></img>
+
                 </div>
                 <div className='sidebar-profile'>
                         {isLoggedInString === 'true' && <img src={fakeAvatar} onClick={handleCollapsedSidebar} className={` avatar`}></img>}
@@ -46,7 +51,7 @@ function Sidebar(props) {
                         <li>
                             <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/dashboard"}>
                                 <Icon name={"LayoutDashboard"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                <span className={`${collapsed ? 'collapsed-span' : ''}`}>Dashboard</span>
+                                <span className={`${collapsed ? 'collapsed-span' : ''}`}>{userType ==='admin' ? 'Admin Dashboard' : 'Dashboard'}</span>
                             </NavLink>
                         </li>
                         {
@@ -62,7 +67,7 @@ function Sidebar(props) {
                         {
                             isLoggedInString === 'false' ? (
                             <li>
-                                <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/login"}>
+                                <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/LogInOptions"}>
                                     <Icon name={"LogIn"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
                                     <span className={`${collapsed ? 'collapsed-span' : ''}`}>Login</span>
                                 </NavLink>

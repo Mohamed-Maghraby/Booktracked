@@ -1,255 +1,343 @@
-*{
-    font-family: 'Inter', sans-serif;
-    /* background-color: white; */
+* {
+  font-family: "Inter", sans-serif;
+  /* background-color: white; */
 }
 :root {
-    --Text-color-1 : #54716B;
-    --Text-color-2 : #ffffff;
-    --Primary-Color-1 : hsl(168, 12%, 47%);
-    --Primary-Color-2 : #AFC4BF;
-    
-    --Secondary-text-color  : rgb(92, 92, 92);
+  --Text-color-1: #54716b;
+  --Text-color-2: #ffffff;
+  --Primary-Color-1: hsl(168, 12%, 47%);
+  --Primary-Color-2: #afc4bf;
+
+  --Secondary-text-color: rgb(92, 92, 92);
 }
 
 /*General Classes*/
 .container {
-    width: 1200px;
-    margin: auto
+  width: 1200px;
+  margin: auto;
 }
 
-.home, .library {
-    display: flex;
-    height: 5000px;
+.home,
+.library {
+  display: flex;
+  height: 5000px;
 }
 
 .content {
-    flex: 1;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    align-items: flex-start !important;
-   
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: flex-start !important;
 }
-    
 
 /*Start Header*/
 .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .header .logo {
-    width: 150px;
+  width: 150px;
 }
 
 .header nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .header ul {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
 }
 
 .header li {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 
 .header a {
-    text-decoration: none;
-    color: var(--Text-color-1);
-    font-weight: 500;
+  text-decoration: none;
+  color: var(--Text-color-1);
+  font-weight: 500;
 }
 /*End Header*/
 
 /*Button*/
 .button {
-    width: 165px;
-    height: 40px;
-    background-color: var(--Primary-Color-1);
-    border-radius: 8px;
-    border: none;
-    color: var(--Text-color-2);
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
+  width: 165px;
+  height: 40px;
+  background-color: var(--Primary-Color-1);
+  border-radius: 8px;
+  border: none;
+  color: var(--Text-color-2);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
 }
 /*Button*/
 
 /*Start Card*/
 .search-result {
-    padding: 100px 0;
+  padding: 100px 0;
 }
 
 .free-books {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 50px 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 50px 50px;
 }
 
 .card-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;    
-    justify-content: center;
-    border-radius: 16px;
-    box-shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.15), 0px 2px 7px 0px rgba(16, 25, 40, 0.15), 0px 2px 5px -2px rgba(16, 25, 40, 0.15);
-    width: 255px;
-    padding: 20px 0;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.15),
+    0px 2px 7px 0px rgba(16, 25, 40, 0.15),
+    0px 2px 5px -2px rgba(16, 25, 40, 0.15);
+  width: 255px;
+  padding: 20px 0;
 }
 .book-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    padding: 0px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 0px 12px;
 }
 
-.book-cover,  .library-book-wrapper .book-cover{
-    height: 241px;
-    width: 173px;
-    object-fit: cover;
-    box-shadow: 0px 0px 5px 0px #00000021;
+.book-cover,
+.library-book-wrapper .book-cover {
+  height: 241px;
+  width: 173px;
+  object-fit: cover;
+  box-shadow: 0px 0px 5px 0px #00000021;
 }
-.card-wrapper .book-title, .library-book-wrapper .book-title{
-    width: 180px;
-    font-size: 20px;
-    font-weight: 600;
-    margin: 20px 0 10px 0;
-    text-align: center;
-    max-height: 50px;
-    overflow: hidden;
-    cursor: pointer;
-
+.card-wrapper .book-title,
+.library-book-wrapper .book-title {
+  width: 180px;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+  text-align: center;
+  max-height: 50px;
+  overflow: hidden;
+  cursor: pointer;
 }
-.card-wrapper .author , .library-book-wrapper .author{
-    font-size: 16px;
-    font-weight: 400;
-    text-align: center;
-    margin: 0 0 10px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 140px;    
+.card-wrapper .author,
+.library-book-wrapper .author {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 140px;
 }
-.card-wrapper .rating, .library-book-wrapper .rating{
-    margin: 0 0 10px 0;
+.card-wrapper .rating,
+.library-book-wrapper .rating {
+  margin: 0 0 10px 0;
 }
 .book-icon-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 5px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0;
 }
 /*End Card*/
 
 /*Start Search API*/
-.book-search-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 0;
-    width: 100%;
+.book-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  width: 100%;
 }
 .book-search-wrapper {
-    position: relative;
+  position: relative;
 }
 .book-search-wrapper input {
-    width: 666px;
-    height: 50px;
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 2px solid var(--Primary-Color-1);
-    outline: none;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--Text-color-1);
+  width: 666px;
+  height: 50px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 2px solid var(--Primary-Color-1);
+  outline: none;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--Text-color-1);
 }
 .book-search-wrapper input:focus {
-    box-shadow: 0px 2px 8px 0px #00000038;
+  box-shadow: 0px 2px 8px 0px #00000038;
 }
 .book-search-wrapper input::placeholder {
-    font-size: 16px;
-    color :#798481
-    
+  font-size: 16px;
+  color: #798481;
 }
 .search-button {
-    height: 50px;
-    border-radius: 50px;
-    position: absolute;
-    right: 0%;
+  height: 50px;
+  border-radius: 50px;
+  position: absolute;
+  right: 0%;
 }
 .search-button:hover {
-    background-color: #5f7a75;
+  background-color: #5f7a75;
 }
 
-
 .ql-tooltip {
-    background-color: #3a3a3af7 !important;
-    border-radius: 8px !important;
+  background-color: #3a3a3af7 !important;
+  border-radius: 8px !important;
 }
 
 /*Icom Component*/
 .icon-component-wrapper {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .library-book-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.15),
+    0px 2px 7px 0px rgba(16, 25, 40, 0.15),
+    0px 2px 5px -2px rgba(16, 25, 40, 0.15);
+  width: 250px;
+  padding: 20px 0;
+}
+
+.info-message {
+  position: absolute;
+  z-index: 10 !important;
+  top: 55px;
+  right: 10px;
+  background-color: #f3f3f3;
+  width: 85%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: left;
+  padding: 8px 10px;
+  box-shadow: rgb(149 157 165 / 43%) 0px 8px 24px;
+}
+.info-message .inner-text {
+  width: 100%;
+  margin: 0px 0px 0px 10px;
+  padding: 5px 0;
+}
+
+.info-message .icon-component-wrapper {
+  margin: 0px 0px 0px 10px;
+  /* padding: 8px 0; */
+}
+
+.info-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-top-left-radius: 10px;
+  background-color: green;
+}
+
+.reader-sp {
+  font-size: 50px !important;
+}
+
+g.class-to-annotate {
+  cursor: pointer !important;
+}
+
+/*Popup*/
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100; /* Ensure popup is above other elements */
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.popup-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+rect {
+  pointer-events: all;
+}
+
+/*LogInOption*/
+.LogInOption {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 16px;
-    box-shadow: 0px 0px 0px 1px rgba(16, 25, 40, 0.15), 0px 2px 7px 0px rgba(16, 25, 40, 0.15), 0px 2px 5px -2px rgba(16, 25, 40, 0.15);
-    width: 250px;
-    padding: 20px 0;
+}
+.LogInOption-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #a8bfba;
+    border-radius: 5px;
+    border: 2px solid black;
+    border-bottom: none;
+    margin: 50px 0;
+
 }
 
-.info-message {
-    position: absolute;
-    z-index: 10 !important;
-    top: 55px;
-    right: 10px;
-    background-color: #f3f3f3;
-    width: 85%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    text-align: left;
-    padding: 8px 10px;
-    box-shadow: rgb(149 157 165 / 43%) 0px 8px 24px;
-}
-.info-message .inner-text {
-    width: 100%;
-    margin: 0px 0px 0px 10px;
-    padding: 5px 0;
+.admin-login-container, .user-login-container {
+    padding: 25px 40px;
+    width: 200px;
+    cursor: pointer;
+    text-align: center;
+    border-bottom: 3px solid black;
+    font-weight: 600;
+
 }
 
-.info-message .icon-component-wrapper {
-    margin: 0px 0px 0px 10px;
-    /* padding: 8px 0; */
+.admin-login-container:hover, .user-login-container:hover {
+    background-color: #6e8b85;
+
 }
 
-.info-message::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;  
-    height: 100%;
-    border-top-left-radius: 10px;
-    background-color: green;
-  }
 
-.reader-sp {
-    font-size: 50px !important;
+.LogInOption-title {
+    font-size: 18px;
+    font-weight: 600;
+    padding:20px 0 5px 0 ;
+}
+.LogInOption-note {
+    font-size: 16px;
+    text-decoration: underline;
+    padding:0 0 15px 0 ;
 }

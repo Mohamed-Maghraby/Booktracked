@@ -2,14 +2,20 @@ import React, { useRef } from 'react'
 import Sidebar from '../utilities/Sidebar';
 import Button from '../utilities/Button';
 import Rating from '../images/Rating.svg'
+import { useNavigate } from 'react-router-dom';
+
 
 import { useState, useEffect } from "react";
 
 function Library() {
 
+  const navigate = useNavigate();
+
   const [message, setMessage] = useState('')
   const [booksData, setBooksData] = useState([])
   const [isDisplay, setIsDisplay] = useState(false)
+
+  
 
   const requestOptions = {
     method: 'POST',
@@ -44,8 +50,26 @@ function Library() {
 
   }, [])
 
-  function handleClick() {
-    console.log("you will be dircted");
+  async function handleClick(book_id) {
+
+    
+  const requestOptions = {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json',
+      // Authorization': `Bearer ${token}`, // notice the Bearer before your token
+    },
+    body: JSON.stringify({book_id: book_id})
+  }
+
+    const response = await fetch('http://localhost:3001/loadBook', requestOptions);
+    const res = await response.json();
+    const servingUrl = await res.servingUrl;
+    console.log(res);
+
+    navigate('/viewerTest', { state: { book_id: book_id, servingUrl : servingUrl } }); // Redirect with props
+
   }
 
   function displayBookData() {
@@ -64,7 +88,7 @@ function Library() {
             <h2 className="book-title" title={title}>{title}</h2>
             <span className="author" title={author}>{author}</span>
             <img className="rating" src={Rating}></img>
-            <Button styleClass="button" textContent="Read" handleClick={handleClick}></Button>
+            <Button styleClass="button" textContent="Read" handleClick={() => handleClick(book_id)}></Button>
           </div>
         )
       })

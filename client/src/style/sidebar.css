@@ -39,7 +39,7 @@
 .sidebar nav ul li a {
     text-decoration: none;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     border-bottom: 1.5px #00000014 solid;
     padding: 15px 15px;
     gap: 20px;

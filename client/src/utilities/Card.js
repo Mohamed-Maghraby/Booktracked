@@ -30,6 +30,7 @@ function Card(props) {
         title: props.title,
         author: props.author,
         download_html: props.download_html,
+        download_epub: props.download_epub,
     };
 
     const requestOptions = {
@@ -49,6 +50,7 @@ function Card(props) {
         setInsertionCode( (prevInsertionCode) => prevInsertionCode = res.insertionCode)
 
         console.log(data.download_html);
+        console.log(data.download_epub);
 
         if (response.status == 401) {
             console.log(response.status);

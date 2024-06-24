@@ -1,8 +1,9 @@
 import React, { useState , useEffect} from 'react'
 import Button from '../utilities/Button';
 import '../style/register_LogIn.css'
-import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from '../utilities/Sidebar';
+import { useLocalStorage } from 'usehooks-ts'
 
 function LogIn() {
     
@@ -12,10 +13,17 @@ function LogIn() {
         password: ""
     })
     
+    /*States */
     const [responseMessage , setResponseMessage] = useState("");
     const [val , setVal] = useState(false)
     const [username , setUsername] = useState('')
+    
+    /*Hooks*/
     const navigate = useNavigate()
+    const transfare = useLocation();
+    const userTypeParam = transfare.state?.userType; // Access the data using optional chaining
+    const [userType, setUserType, removeUserType] = useLocalStorage('user-type', null)
+
     
 
     function handleuserLogInInfo(event) {
@@ -38,11 +46,14 @@ function LogIn() {
     }
 
     async function logInUser() {
-        const response = await fetch("http://localhost:3001/user/login", requestOptions);
+        const response = await fetch(`http://localhost:3001/${userTypeParam}/login`, requestOptions);
+        console.log(userTypeParam);
         const data = await response.json();
         let message = await data.message
         setUsername(data.username) 
-        setResponseMessage(message)
+        setResponseMessage(data.message)
+        setUserType(data.userType)
+
         console.log("request Sent");
         console.log(userLogInInfo);
     }
@@ -62,7 +73,7 @@ function LogIn() {
             <div className='content'>
                 <div className='logIn-content'>
                     <div className='logIn-header'>
-                        <h2>Log In</h2>
+                        <h2>Login as {userTypeParam}</h2>
                         <p>Enter your credentials to Log In</p>
                     </div>
 
