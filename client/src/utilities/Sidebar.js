@@ -7,13 +7,13 @@ import fakeAvatar from '../images/avatar.svg'
 import { useReadLocalStorage } from 'usehooks-ts'
 
 
-function Sidebar(props) {
+function Sidebar() {
 
     let isLoggedInString = localStorage.getItem("IsLoggedIn");
     let username = localStorage.getItem("username");
-    console.log(isLoggedInString);
 
-    console.log(props.val + " this is val"); 
+    
+
 
     const [collapsed, setCollapsed] = useState(false)
     const userType = useReadLocalStorage('user-type')
@@ -22,6 +22,8 @@ function Sidebar(props) {
     function handleCollapsedSidebar (){
         setCollapsed(!collapsed);
         console.log(userType);
+        // console.log(isLoggedInString);
+        console.log(username);
     }
 
     return (

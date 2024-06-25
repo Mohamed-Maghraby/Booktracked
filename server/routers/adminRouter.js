@@ -8,15 +8,17 @@ const {admin_protect} = adminAuthMiddleware
 
 
 
-const {login, logout, listUsers, searchUser, deleteUser, getUserLibrary, createResource, downloadResource, listResources} = admin;
+const {login, logout, listUsers, searchUser, deleteUser, getUserLibrary, createResource, downloadResource, listResources, updateUser, ListBooks} = admin;
 
 router.post('/login', login);
 router.post('/logout', logout);
 router.post('/listUsers' ,listUsers);
 router.post('/searchUser', searchUser);
 router.post('/deleteUser', deleteUser);
+router.post('/updateUser', updateUser);
 router.post('/getUserLibrary', getUserLibrary);
 router.post('/createResource', upload.fields([{ name: 'cover'},{ name: 'resource_storage'}]),createResource);
 router.get('/downloadResource', downloadResource);
 router.get('/listResources', listResources);
+router.post('/ListBooks', ListBooks);
 module.exports = router;

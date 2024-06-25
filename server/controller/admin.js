@@ -153,8 +153,9 @@ async function searchUser(req, res) {
 }
 
 async function deleteUser(req, res) {
-    let data = req.body
-    let user_id = data.user_id
+    let data = req.body;
+    let user_id = data.user_id;
+    console.log(user_id);
     const deleteUserQuery = `DELETE FROM user WHERE user_id = ?`;
     try {
         const [result] = await mysql_promise.execute(deleteUserQuery, [user_id]);
@@ -163,8 +164,65 @@ async function deleteUser(req, res) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while fetching users.' });
     }
-
 }
+
+async function updateUser(req, res) {
+    let data = req.body;
+    const {user_id, username, email} = data;
+    const changedField = {
+        state : ''
+    }
+    const updateUserQuery = ()=>{
+        if (username && email) {
+            changedField.state = 'both'
+            return `UPDATE user SET username = ?, email = ? WHERE user_id = ?`;
+        } else if (username) {
+            changedField.state = 'username'
+            return  `UPDATE user SET username = ? WHERE user_id = ?`;
+        } else if (email) {
+            changedField.state = 'email'
+            return `UPDATE user SET email = ? WHERE user_id = ?`;
+        }
+    }
+    console.log(user_id);
+    // const updateUserQuery = `UPDATE user SET username = ?, email = ? WHERE user_id = ?`;
+    try {
+        const [result] = await mysql_promise.execute(updateUserQuery(), [username, email, user_id]);
+        console.log(result);
+        res.status(200)
+        res.json({message : 'User Updated Successfully', changedField : changedField});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching users.' });
+    }
+}
+
+
+
+async function ListBooks(req, res) {
+    const { limit, offset } = req.body;
+
+    // Validate limit and offset
+    const validLimit = Number.isInteger(limit) && limit > 0 ? limit : 10; // default limit to 10 if not provided or invalid
+    const validOffset = Number.isInteger(offset) && offset >= 0 ? offset : 0; // default offset to 0 if not provided or invalid
+
+    const ListBooks = 'SELECT book_id, title, author FROM books ORDER BY book_id LIMIT ? OFFSET ?';
+
+    try {
+        const [rows] = await mysql_promise.execute(ListBooks, [validLimit, validOffset]);
+        // Ensure that only necessary data is sent back
+        const books = rows.map(row => ({
+            book_id: row.book_id,
+            title: row.title,
+            author: row.author,
+        }));
+        res.json(books);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching users.' });
+    }
+}
+
 async function getUserLibrary(req, res) {
     let data = req.body
     let user_id = data.user_id
@@ -263,4 +321,4 @@ async function listResources(req, res) {
 
 
 
-module.exports = {login, logout, listUsers, searchUser, deleteUser, getUserLibrary, createResource, downloadResource, listResources};
+module.exports = {login, logout, listUsers, searchUser, deleteUser, getUserLibrary, createResource, downloadResource, listResources, updateUser, ListBooks};

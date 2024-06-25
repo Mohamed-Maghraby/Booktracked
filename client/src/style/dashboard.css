@@ -10,7 +10,6 @@
 }
 .dahsboard {
     display: flex;
-    height: 5000px;
 }
 
 .content {
@@ -19,6 +18,16 @@
     text-align: center;
     align-items: flex-start;
 }
+
+.admin-user-dahsboard-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+
+
 .share {
     /* border: 1px var(--border-color) solid; */
     box-shadow: 0px 0px 2px 2px #0000001a;
@@ -135,11 +144,11 @@
 
 /*List Users*/
 .list-user-container {
-    width: 80%;
+    flex-basis: 60%;
+    height: 646px;
     box-sizing: border-box;
     margin: 0 auto;
     border: 1px solid #eee;
-    background-color: #f9f9f9;
     border-radius: 8px;
     overflow-x: auto;
 }
@@ -193,18 +202,10 @@
     text-align: left;
 }
 
-.list-user-footer button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
+.list-user-footer  {
+    display: flex;
+    padding: 25px 26px;
+    gap: 15px;
 }
 
-.list-user-footer button:hover {
-    background-color: #0056b3;
-}
+

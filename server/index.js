@@ -9,7 +9,7 @@ const searchRouter = require('./routers/searchRouter');
 const addBookRouter = require('./routers/addBookRouter');
 const getBookRouter = require('./routers/getBookRouter');
 const loadBookRouter = require('./routers/loadBookRouter');
-const addAnnotationRouter = require('./routers/addAnnotationRouter');
+const annotationRouter = require('./routers/annotationRouter');
 const userRouter = require('./routers/userRouter');
 const adminRouter = require('./routers/adminRouter');
 
@@ -75,7 +75,7 @@ app.use('/getBook', getBookRouter)
 app.use('/loadBook', loadBookRouter)
 
 /*add annotation*/
-app.use('/addAnnotation', addAnnotationRouter)
+app.use('/', annotationRouter)
 
 /*user router, contains all user features logn in, register ... */
 app.use('/user', userRouter);

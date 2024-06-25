@@ -5,7 +5,6 @@ import Share from '../utilities/Share';
 import { useReadLocalStorage } from 'usehooks-ts'
 import ListUsers from 'utilities/ListUsers';
 
-
 function Dashboard() {
 
   const userType = useReadLocalStorage('user-type')
@@ -15,10 +14,9 @@ function Dashboard() {
   function userIsAdmin () {
     return (
       <>
-        <div>This Is Admin Page</div>
+        <h1 style={{'flex-basis' : '100%', margin : '50px 0', 'font-weight' : '600'}}>Admin Dashboard</h1>
         <ListUsers></ListUsers>
         <Share></Share>
-
       </>
     )
   }
@@ -31,7 +29,7 @@ function Dashboard() {
   return (
     <div className='dahsboard'>
       <Sidebar></Sidebar>
-      <div className='content'>
+      <div className='content admin-user-dahsboard-container'>
         {userType === 'admin'? userIsAdmin() : userIsUser()}
       </div>
     </div>

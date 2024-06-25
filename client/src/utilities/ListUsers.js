@@ -71,7 +71,8 @@ function ListUsers() {
             </div>
 
             <div className="list-user-footer">
-                <button onClick={() => setOffset(offset + 5)}>Load more</button>
+                <Icon name={'CircleChevronLeft'} color={"black"} size={28} fill={"none"} strokeWidth={2} onClick={() => setOffset(offset - 5)}></Icon>
+                <Icon name={'CircleChevronRight'} color={"black"} size={28} fill={"none"} strokeWidth={2} onClick={() => setOffset(offset + 5)}></Icon>
             </div>
         </div>
     )

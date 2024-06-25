@@ -5,7 +5,7 @@ import Popup from "utilities/Popup";
 import { EpubCFI } from 'epubjs';
 import {Rendition} from 'epubjs';
 import Toolbar from "utilities/Toolbar";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
 
 var intersectRect = require('intersect-rect');
 let Clash = require("../functions/Clash")
@@ -14,23 +14,6 @@ function ViewerTest() {
 
 
 
-  async function save_annotation_db(annotation, book_id) {
-
-    const requestOptions = {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-type': 'application/json',
-        // Authorization': `Bearer ${token}`, // notice the Bearer before your token
-      },
-      body: JSON.stringify({ annotation: annotation, book_id: book_id })
-    }
-
-    const response = await fetch('http://localhost:3001/addAnnotation', requestOptions);
-    const res = await response.json();
-    console.log(res);
-
-  }
 
 
   /*The initail epub book style object passed to the reader to style the book reader */
@@ -188,16 +171,100 @@ function ViewerTest() {
   const [markedCfi, setMarkedCfi] = useState(null);
   const [deAnnotated, setDeAnnotated] = useState(false);
   const [coordinates, setCoordinates] = useState({});
+  const [notes, setNotes] = useState([]);
 
   const transfare = useLocation();
   const book_id = transfare.state?.book_id; // Access the data using optional chaining
   const servingUrl = transfare.state?.servingUrl; // Access the data using optional chaining
 
-  window.addEventListener('unload', () => {
-    console.log("I am closing");
-    save_annotation_db(window.localStorage.getItem(`${book_id}_annotations`), book_id);
+  const annotationsRef = useRef(null); // Store annotations to avoid unnecessary re-renders
 
-  });
+
+  async function save_annotation_db(annotation, book_id) {
+
+    const requestOptions = {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        // Authorization': `Bearer ${token}`, // notice the Bearer before your token
+      },
+      body: JSON.stringify({ annotation: annotation, book_id: book_id })
+    }
+
+    const response = await fetch('http://localhost:3001/addAnnotation', requestOptions);
+    const res = await response.json();
+    console.log(res);
+  }
+
+  async function get_annotation_db(book_id) {
+
+    const requestOptions = {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        // Authorization': `Bearer ${token}`, // notice the Bearer before your token
+      },
+      body: JSON.stringify({book_id: book_id })
+    }
+
+    const response = await fetch('http://localhost:3001/getAnnotation', requestOptions);
+    const res = await response.json();
+    window.localStorage.setItem(`${book_id}_annotations`, res);
+
+    const storedAnnotations = JSON.parse(res);
+    const annotationsArray = Object.values(storedAnnotations);
+    annotationsArray.map(annotation => {
+      rendition.annotations.add(annotation.type, annotation.cfiRange, {}, () => { }, annotation.className, annotation.styles);
+    })
+    
+  }
+
+  async function add_note_db(book_id) {
+    const requestOptions = {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        // Authorization': `Bearer ${token}`, // notice the Bearer before your token
+      },
+      body: JSON.stringify({book_id: book_id, note:notes })
+    }
+
+    const response = await fetch('http://localhost:3001/addNote', requestOptions);
+    const res = await response.json();
+    console.log(res);
+
+  }
+
+
+
+
+  // window.addEventListener('unload', () => {
+  //   console.log("I am closing");
+  //   save_annotation_db(window.localStorage.getItem(`${book_id}_annotations`), book_id);
+
+  // });
+
+  useEffect(() => {
+    // Load annotations from localStorage or initialize to an empty array
+    annotationsRef.current = window.localStorage.getItem(`${book_id}_annotations`) || [];
+
+    // Function to save annotations on component unmount or when bookId changes
+    const saveAnnotations = () => {
+      if (annotationsRef.current.length > 0) { // Save only if annotations exist
+        save_annotation_db(annotationsRef.current, book_id); // Call your DB saving function
+        add_note_db(book_id)
+
+      }
+    };
+
+    // Add the saveAnnotations function to the cleanup function
+    return () => saveAnnotations();
+  }, [rendition]); // Re-run useEffect only when bookId changes
+
+
 
 
 
@@ -212,7 +279,6 @@ function ViewerTest() {
   useEffect(() => {
 
     if (rendition) {
-      console.log(rendition);
 
       /*You set flow & Spread from rendition object dirctly either from here or 
       from getRendition in prop, or set them with epubOptions props*/
@@ -252,7 +318,6 @@ function ViewerTest() {
 
       //Load stored annotations when the book is loaded
       rendition.on("started", (event, section) => {
-
         console.log(servingUrl);
 
         if (localStorage.getItem(`${book_id}_annotations`)) {
@@ -264,17 +329,6 @@ function ViewerTest() {
           })
         }
       });
-      
-    
-
-      // rendition.on("rendered", (event, section) => {
-      //   let highlightsArray = Object.values(section.highlights)
-      //   highlightsArray.map(highligh => highligh.element.addEventListener('click', () => { 
-      //     console.log("You hoverd over me") 
-      //     console.log(highligh.element.children[0]);
-      //   })); 
-      // });
-
 
     }
   }, [book, rendition]);
@@ -313,7 +367,13 @@ function ViewerTest() {
 
         let annotationStyle = annotationType === "highlight" ? { "fill": "yellow", "fill-opacity": "0.3", "mix-blend-mode": "multiply" } : { 'stroke': 'none', 'stroke-opacity': '1', "mix-blend-mode": "multiply" };
         rendition.annotations.add(annotationType, ePubCfi, {}, callBackfn, 'class-to-annotate', annotationStyle)
-        console.log(rendition.annotations);
+
+        const note = Object.values(rendition.annotations._annotations).map((annotation)=>{
+         return annotation.mark.range.toString()
+        });
+        setNotes(note);
+
+
 
       }
       else {
@@ -326,12 +386,20 @@ function ViewerTest() {
 
   function UnAnnotete(cfiRange, annotationType) {
     rendition.annotations.remove(cfiRange, annotationType);
+    window.localStorage.setItem(`${book_id}_annotations`, JSON.stringify(rendition.annotations._annotations));
+
+    const notes = Object.values(rendition.annotations._annotations).map((annotation)=>{
+      return annotation.mark.range.toString()
+     });
+
+    setNotes(notes);
 
   }
 
   function triggerHighlight() {
     let annotationType = "highlight";
     annotateText(annotationType);
+
   }
   function triggerUnderline() {
     let annotationType = "underline";
@@ -341,6 +409,7 @@ function ViewerTest() {
   function unHighlight() {
     let annotationType = "highlight";
     UnAnnotete(markedCfi, annotationType);
+
   }
 
   function unUnderline() {

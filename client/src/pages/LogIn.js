@@ -16,13 +16,15 @@ function LogIn() {
     /*States */
     const [responseMessage , setResponseMessage] = useState("");
     const [val , setVal] = useState(false)
-    const [username , setUsername] = useState('')
+    const [username , setUsername] = useState("")
     
     /*Hooks*/
     const navigate = useNavigate()
     const transfare = useLocation();
     const userTypeParam = transfare.state?.userType; // Access the data using optional chaining
     const [userType, setUserType, removeUserType] = useLocalStorage('user-type', null)
+    // const [userName, setUserName, removeUserName] = useLocalStorage('username', null)
+    // const [isLoggedIn, setIsLoggedIn, removeIsLoggedIn] = useLocalStorage('IsLoggedIn', '')
 
     
 
@@ -62,9 +64,12 @@ function LogIn() {
         if (responseMessage === "You are Logged In") {
             localStorage.setItem("IsLoggedIn", "true");
             localStorage.setItem("username", username);
+            // setIsLoggedIn("true")
+            // setUserName(username)
             setVal(true)
             navigate("/"); 
-        }     
+        } 
+        console.log(typeof(username));    
     }, [responseMessage])
 
     return (

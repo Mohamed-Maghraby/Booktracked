@@ -330,7 +330,6 @@ rect {
 
 }
 
-
 .LogInOption-title {
     font-size: 18px;
     font-weight: 600;
@@ -340,4 +339,9 @@ rect {
     font-size: 16px;
     text-decoration: underline;
     padding:0 0 15px 0 ;
+}
+
+/*ManageUser*/
+.manage-user {
+  display: flex;  
 }
