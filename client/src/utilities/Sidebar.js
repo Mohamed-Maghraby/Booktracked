@@ -5,6 +5,7 @@ import Icon from './Icon';
 import menuIcon from '../images/Menu.svg'
 import fakeAvatar from '../images/avatar.svg'
 import { useReadLocalStorage } from 'usehooks-ts'
+import ListItem from './ListItem';
 
 
 function Sidebar() {
@@ -38,52 +39,21 @@ function Sidebar() {
                 </div>
                 <nav>
                     <ul>
-                        <li>
-                            <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/"}>
-                                <Icon name={"Home"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                <span className={`${collapsed ? 'collapsed-span' : ''}`}>Home</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/library"}>
-                                <Icon name={"Library"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                <span className={`${collapsed ? 'collapsed-span' : ''}`}>Library</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/dashboard"}>
-                                <Icon name={"LayoutDashboard"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                <span className={`${collapsed ? 'collapsed-span' : ''}`}>{userType ==='admin' ? 'Admin Dashboard' : 'Dashboard'}</span>
-                            </NavLink>
-                        </li>
+                        <ListItem icon={<Icon name={"Home"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>} collapsed={collapsed} url='/'>Home</ListItem>
+                        <ListItem icon={<Icon name={"Library"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>} collapsed={collapsed} url='/library'>Library</ListItem>
+                        <ListItem icon={<Icon name={"LayoutDashboard"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>} collapsed={collapsed} url='/dashboard'>{userType ==='admin' ? 'Admin Dashboard' : 'Dashboard'}</ListItem>
                         {
                             isLoggedInString === 'false' ? (
-                            <li>
-                                <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/register"}>
-                                    <Icon name={"Landmark"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                    <span className={`${collapsed ? 'collapsed-span' : ''}`}>Register</span>
-                                </NavLink>
-                            </li>
-                            ) : null
-                        }
-                        {
-                            isLoggedInString === 'false' ? (
-                            <li>
-                                <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/LogInOptions"}>
-                                    <Icon name={"LogIn"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                    <span className={`${collapsed ? 'collapsed-span' : ''}`}>Login</span>
-                                </NavLink>
-                            </li>
+                                <>
+                                <ListItem icon={<Icon name={"Landmark"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>} collapsed={collapsed} url='/register'>Register</ListItem>
+                                <ListItem icon={<Icon name={"LogIn"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>} collapsed={collapsed} url='/LogInOptions'>Login</ListItem>
+                                </>
+
                             ) : null
                         }
                         {
                             isLoggedInString === 'true' ? (
-                            <li>
-                                <NavLink className={`${collapsed ? 'collapsed-a' : ''}`} to={"/logout"}>
-                                    <Icon name={"LogOut"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>
-                                    <span className={`${collapsed ? 'collapsed-span' : ''}`}>Logout</span>
-                                </NavLink>
-                            </li>
+                              <ListItem icon={<Icon name={"LogOut"} color={"black"} size={25} strokeWidth={2} fill={"none"}></Icon>} collapsed={collapsed} url='/logout'>Logout</ListItem>
                             ) : null
                         }
 
