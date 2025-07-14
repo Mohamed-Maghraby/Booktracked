@@ -127,7 +127,7 @@ async function register (req, res) {
 
     const getUserIdQuery = "SELECT user_id FROM user WHERE email = ?"
 
-    //search user id in datapase
+    //search user id in database
     async function getUserId (email) {
         return new Promise((resolve, reject)=>{
             database.query(getUserIdQuery, email, (error, result)=>{
@@ -155,7 +155,7 @@ async function register (req, res) {
             // sameSite: 'Lax'
         })
        await res.json({
-            message: "User Registerd Successfully",
+            message: "User Registered Successfully",
             // userToken: generateToken(userId, username)
         })
     }

@@ -10,15 +10,11 @@ import ListItem from './ListItem';
 
 function Sidebar() {
 
-    let isLoggedInString = localStorage.getItem("IsLoggedIn");
-    let username = localStorage.getItem("username");
-
-    
-
-
-    const [collapsed, setCollapsed] = useState(false)
+    const isLoggedInString = localStorage.getItem("IsLoggedIn");
+    const username = localStorage.getItem("username");
     const userType = useReadLocalStorage('user-type')
 
+    const [collapsed, setCollapsed] = useState(false)
 
     function handleCollapsedSidebar (){
         setCollapsed(!collapsed);
