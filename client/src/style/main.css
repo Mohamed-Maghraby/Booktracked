@@ -20,7 +20,7 @@
 .home,
 .library {
   display: flex;
-  height: 5000px;
+  height: auto;
 }
 
 .content {
