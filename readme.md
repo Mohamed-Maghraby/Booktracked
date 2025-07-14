@@ -140,7 +140,6 @@ of course need to be improved. and point is I know how to do so
 
 ## ✨ Future Enhancements
 
-- Add dark mode
 - Implement full EPUB.js reader
 - AI-powered personalized reading suggestions and book summarization
 - Tailwind.css instead of native CSS
@@ -149,6 +148,8 @@ of course need to be improved. and point is I know how to do so
 - React-Query for fetching 
 - React Hook Form to handle forms
 - Enhancing authentication with auth library like Auth0
+- Add dark mode
+
 
 
 ## Finally 
